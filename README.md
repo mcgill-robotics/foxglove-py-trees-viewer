@@ -1,5 +1,7 @@
 # PyTrees Foxglove Viewer
 
+![PyTrees Viewer Preview](https://github.com/user-attachments/assets/677322b8-ad3e-453e-a3ac-f16cf5ea0675)
+
 A custom Foxglove Studio extension panel designed to provide a rich, interactive visualization of ROS 2 `py_trees_ros` behavior trees. It listens to `/snapshots` topics published by PyTrees and renders them using ReactFlow and Dagre for clean, automatic top-down layouts.
 
 ## Features
