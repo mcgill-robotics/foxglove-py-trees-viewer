@@ -1,39 +1,61 @@
-# py-trees-foxglove-viewer
+# PyTrees Foxglove Viewer
 
-[Foxglove](https://foxglove.dev) allows developers to create [extensions](https://docs.foxglove.dev/docs/visualization/extensions/introduction), or custom code that is loaded and executed inside the Foxglove application. This can be used to add custom panels. Extensions are authored in TypeScript using the `@foxglove/extension` SDK.
+A custom Foxglove Studio extension panel designed to provide a rich, interactive visualization of ROS 2 `py_trees_ros` behavior trees. It listens to `/snapshots` topics published by PyTrees and renders them using ReactFlow and Dagre for clean, automatic top-down layouts.
 
-## Develop
+## Features
 
-Extension development uses the `npm` package manager to install development dependencies and run build scripts.
+- **Automatic Dagre Layout:** Dynamically arranges tree nodes into a top-down organization chart, smoothly adapting to tree structure changes.
+- **Interactive Canvas:** Native pan/zoom controls using ReactFlow, allowing you to easily navigate massive, complex behavior trees.
+- **Live Status Updates:** Nodes automatically change colors based on their exact ROS execution state:
+  - 🟡 **RUNNING:** Deep Amber
+  - 🟢 **SUCCESS:** Deep Green
+  - 🔴 **FAILURE:** Deep Red
+  - ⚫ **WAITING / INVALID:** Dark Blue / Gray
+- **Success State Latching:** PyTrees `Sequence(memory=True)` drops skipped successful nodes back to `INVALID`. This extension intercepts those drops and visually "latches" the success state, giving you a beautiful green "trail" of completed tasks as the robot progresses through its mission.
+- **Embedded Feedback Messages:** Displays raw `message` strings and `additional_detail` feedback directly on the node cards so you don't need to cross-reference terminal logs.
+- **Focus Mode:** Click any node to instantly isolate and highlight the path from the root down to its active children, dimming everything else.
+- **Interactive Blackboard:** Expandable, resizable sidebar that recursively parses and beautifies Python `__repr__` telemetry dumps into collapsable trees using native HTML `<details>` toggles.
 
-To install extension dependencies, run `npm` from the root of the extension package.
+## Installation
+
+### From Source
+
+1. Clone this repository into your workspace.
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Build and install into your local Foxglove Studio:
+   ```sh
+   npm run local-install
+   ```
+4. Reload Foxglove Studio (`Ctrl+R` or `Cmd+R`). The new "PyTrees Viewer" panel will be available in the "Add Panel" menu.
+
+## Packaging and Publishing for your Team
+
+If you want to share this extension with the rest of your organization so it automatically installs in everyone's Foxglove Studio, you can use the built-in Foxglove CLI.
+
+### 1. Publish to your Organization
+Make sure you have logged into the Foxglove CLI (`foxglove auth login`), then simply run:
 
 ```sh
-npm install
+npm run publish-org
 ```
 
-To build and install the extension into your local Foxglove desktop app, run:
+This custom script will automatically package your extension and upload it directly to your organization's registry. Anyone in your organization will now have this extension automatically installed!
 
-```sh
-npm run local-install
-```
-
-Open the Foxglove desktop (or `ctrl-R` to refresh if it is already open). Your extension is installed and available within the app.
-
-## Package
-
-Extensions are packaged into `.foxe` files. These files contain the metadata (package.json) and the build code for the extension.
-
-Before packaging, make sure to set `name`, `publisher`, `version`, and `description` fields in _package.json_. When ready to distribute the extension, run:
+### 2. Manual Packaging (Share without CLI)
+If you just want to generate the `.foxe` file to manually email or drag-and-drop:
 
 ```sh
 npm run package
 ```
 
-This command will package the extension into a `.foxe` file in the local directory.
+This will generate `mcgill-robotics.py-trees-foxglove-viewer-1.0.0.foxe`. Anyone can drag and drop this file directly into their Foxglove Studio window to install the extension instantly.
 
-## Publish
+## Usage
 
-You can publish the extension to the public registry or privately for your organization.
-
-See documentation here: https://docs.foxglove.dev/docs/visualization/extensions/publish/#packaging-your-extension
+1. Open Foxglove Studio and connect to your ROS 2 robot or replay a `.mcap` bag file.
+2. Add a new panel and search for **PyTrees Viewer**.
+3. The panel will automatically subscribe to behavior tree snapshot topics (such as `/planner_root_tree/snapshots`). 
+4. Click and drag the canvas to pan, use your scroll wheel or trackpad to zoom in/out, and click the "Show Blackboard" button to toggle the sidebar!

@@ -1,13 +1,13 @@
 {
   "name": "py-trees-foxglove-viewer",
-  "displayName": "py-trees-foxglove-viewer",
-  "description": "",
-  "publisher": "unknown",
-  "homepage": "",
-  "version": "0.0.0",
-  "license": "UNLICENSED",
+  "displayName": "PyTrees Foxglove Viewer",
+  "description": "A Foxglove Studio extension for visualizing ROS 2 PyTrees behavior trees, featuring interactive pan/zoom, live status updates, feedback message display, and success-state latching.",
+  "publisher": "mcgill-robotics",
+  "homepage": "https://github.com/kaidalisohaib/py-trees-foxglove-viewer",
+  "version": "1.0.0",
+  "license": "MIT",
   "main": "./dist/extension.js",
-  "keywords": [],
+  "keywords": ["foxglove", "ros2", "pytrees", "behavior-tree", "robotics"],
   "scripts": {
     "build": "foxglove-extension build",
     "foxglove:prepublish": "foxglove-extension build --mode production",
@@ -16,6 +16,7 @@
     "lint:fix": "eslint --fix .",
     "local-install": "foxglove-extension install",
     "package": "foxglove-extension package",
+    "publish-org": "npm run package && foxglove extensions publish ./mcgill-robotics.py-trees-foxglove-viewer-1.0.0.foxe",
     "pretest": "foxglove-extension pretest"
   },
   "devDependencies": {
