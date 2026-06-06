@@ -55,6 +55,14 @@ This will generate `mcgill-robotics.py-trees-foxglove-viewer-1.0.0.foxe`. Anyone
 
 ## Usage
 
+**⚠️ IMPORTANT: ROS 2 Node Configuration**  
+In order for this viewer to work, the ROS 2 node running your `py_trees_ros.trees.BehaviourTree` **must** have the following ROS parameters enabled. Otherwise, the tree topology and blackboard data will not be published over the network by default.
+
+```yaml
+default_snapshot_stream: true
+default_snapshot_blackboard_data: true
+```
+
 1. Open Foxglove Studio and connect to your ROS 2 robot or replay a `.mcap` bag file.
 2. Add a new panel and search for **PyTrees Viewer**.
 3. The panel will automatically subscribe to behavior tree snapshot topics (such as `/planner_root_tree/snapshots`). 
