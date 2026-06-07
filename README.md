@@ -1,4 +1,4 @@
-# PyTrees Foxglove Viewer
+# Foxglove PyTrees Viewer
 
 ![PyTrees Viewer Preview](https://github.com/user-attachments/assets/677322b8-ad3e-453e-a3ac-f16cf5ea0675)
 
@@ -20,6 +20,9 @@ A custom Foxglove Studio extension panel designed to provide a rich, interactive
 
 ## Installation
 
+### Quick Install (Recommended)
+You can download the latest pre-compiled `.foxe` release directly from the **Releases** page on this repository. Simply drag and drop the downloaded `.foxe` file anywhere into your Foxglove Studio window to install the extension instantly!
+
 ### From Source
 
 1. Clone this repository into your workspace.
@@ -31,7 +34,7 @@ A custom Foxglove Studio extension panel designed to provide a rich, interactive
    ```sh
    npm run local-install
    ```
-4. Reload Foxglove Studio (`Ctrl+R` or `Cmd+R`). The new "PyTrees Viewer" panel will be available in the "Add Panel" menu.
+4. Reload Foxglove Studio (`Ctrl+R` or `Cmd+R`). The new "Foxglove PyTrees Viewer" panel will be available in the "Add Panel" menu.
 
 ## Packaging and Publishing for your Team
 
@@ -53,7 +56,7 @@ If you just want to generate the `.foxe` file to manually email or drag-and-drop
 npm run package
 ```
 
-This will generate `mcgill-robotics.py-trees-foxglove-viewer-1.0.0.foxe`. Anyone can drag and drop this file directly into their Foxglove Studio window to install the extension instantly.
+This will generate `mcgill-robotics.foxglove-py-trees-viewer-1.0.0.foxe`. Anyone can drag and drop this file directly into their Foxglove Studio window to install the extension instantly.
 
 ## Usage
 
